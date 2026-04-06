@@ -32,11 +32,11 @@ namespace WinFormsApp1
             return num;
         }
 
-        private Rational GetRational(TextBox txtNum, TextBox txtDen, ComboBox cmbSign)
+        private RationalFraction GetRational(TextBox txtNum, TextBox txtDen, ComboBox cmbSign)
         {
             int numerator = GetNumerator(txtNum, cmbSign);
             int denominator = int.Parse(txtDen.Text);
-            return new Rational(numerator, denominator);
+            return new RationalFraction(numerator, denominator);
         }
 
         private void Calculate()
@@ -53,23 +53,23 @@ namespace WinFormsApp1
                 var fraction1 = GetRational(textBox1, textBox2, comboBox1);
                 var fraction2 = GetRational(textBox3, textBox4, comboBox2);
 
-                Rational result = null;
+                RationalFraction result = null;
 
                 switch (comboBox3.Text)
                 {
                     case "+":
                         result = fraction1 + fraction2;
-                        label1.Text = result.Verbose();
+                        label1.Text = result.ToString();
                         break;
 
                     case "-":
                         result = fraction1 - fraction2;
-                        label1.Text = result.Verbose();
+                        label1.Text = result.ToString();
                         break;
 
                     case "*":
                         result = fraction1 * fraction2;
-                        label1.Text = result.Verbose();
+                        label1.Text = result.ToString();
                         break;
 
                     case "/":
@@ -79,7 +79,7 @@ namespace WinFormsApp1
                             return;
                         }
                         result = fraction1 / fraction2;
-                        label1.Text = result.Verbose();
+                        label1.Text = result.ToString();
                         break;
 
                     case "Сравнение":
@@ -94,17 +94,17 @@ namespace WinFormsApp1
                         double dec1 = (double)fraction1.Reduce().Numerator / fraction1.Reduce().Denominator;
                         double dec2 = (double)fraction2.Reduce().Numerator / fraction2.Reduce().Denominator;
 
-                        label1.Text = $"{fraction1.Verbose()} ({dec1:F4}) {compareSign} {fraction2.Verbose()} ({dec2:F4})";
+                        label1.Text = $"{fraction1.ToString()} ({dec1:F4}) {compareSign} {fraction2.ToString()} ({dec2:F4})";
                         return;
 
                     case "Сократить":
-                        label1.Text = $"{fraction1.RawVerbose()} → {fraction1.Reduce().Verbose()}\n" +
-                                     $"{fraction2.RawVerbose()} → {fraction2.Reduce().Verbose()}";
+                        label1.Text = $"{fraction1.RawVerbose()} -> {fraction1.Reduce().ToString()}\n" +
+                                     $"{fraction2.RawVerbose()} -> {fraction2.Reduce().ToString()}";
                         return;
 
                     default:
                         result = fraction1 + fraction2;
-                        label1.Text = result.Verbose();
+                        label1.Text = result.ToString();
                         break;
                 }
             }
