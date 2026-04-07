@@ -81,9 +81,6 @@ namespace WinFormsApp1
 
         public static bool operator ==(RationalFraction a, RationalFraction b)
         {
-            if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
-                return ReferenceEquals(a, b);
-
             var reducedA = a.Reduce();
             var reducedB = b.Reduce();
             return reducedA.numerator == reducedB.numerator &&
